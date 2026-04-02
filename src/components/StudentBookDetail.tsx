@@ -152,11 +152,16 @@ const StudentBookDetail = () => {
                       <tr key={student.maHs} className="hover:bg-slate-50/80 transition-colors divide-x divide-slate-200">
                         <td className="px-4 py-4 text-slate-500 font-medium text-center">{student.stt}</td>
                         <td className="px-4 py-4 font-bold text-slate-700">{student.maHs}</td>
-                        <td className="px-4 py-4 font-bold text-slate-700">{student.name}</td>
+                        <td 
+                          className="px-4 py-4 font-bold text-blue-600 cursor-pointer hover:underline break-words"
+                          onClick={() => navigate(`/student/${student.maHs}`, { state: { schoolId: schoolId || '1', bookId: book.code, schoolName: book.school } })}
+                        >
+                          {student.name}
+                        </td>
                         <td className="px-4 py-4 font-medium text-slate-600">{student.ngaySinh}</td>
                         <td className="px-4 py-4 text-right">
                           <button 
-                            onClick={() => navigate(`/student/${student.maHs}`, { state: { schoolId: location.pathname.split('/')[2], bookId: book.code, schoolName: book.school } })}
+                            onClick={() => navigate(`/student/${student.maHs}`, { state: { schoolId: schoolId || '1', bookId: book.code, schoolName: book.school } })}
                             className="text-blue-600 font-bold hover:text-blue-700 transition-colors"
                           >
                             Xem chi tiết

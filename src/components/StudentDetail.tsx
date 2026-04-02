@@ -85,72 +85,116 @@ const StudentDetail = () => {
   };
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="flex items-center text-sm text-blue-600 mb-6">
-        <button onClick={() => navigate('/')} className="hover:underline font-bold">Quản lý Sổ Đăng bộ</button>
-        <span className="mx-2 text-slate-300">›</span>
-        <button onClick={() => navigate(`/school/${schoolId || '1'}`, { state: { schoolName: schoolName || 'Trường Tiểu Học Lê Quý Đôn' } })} className="hover:underline font-bold">Chi tiết trường</button>
-        <span className="mx-2 text-slate-300">›</span>
-        <button onClick={() => navigate(`/student-book/${bookId || '74724411HS2530'}`, { state: { schoolName: schoolName || 'Trường Tiểu Học Lê Quý Đôn' } })} className="hover:underline font-bold">Chi tiết sổ {bookId || '74724411HS2530'}</button>
-        <span className="mx-2 text-slate-300">›</span>
-        <span className="text-slate-900 font-bold">Chi tiết học sinh</span>
-      </div>
+    <div className="min-h-screen p-6 bg-slate-50/30">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center text-sm text-blue-600 mb-6">
+          <button onClick={() => navigate('/')} className="hover:underline font-bold">Quản lý Sổ Đăng bộ</button>
+          <span className="mx-2 text-slate-300">›</span>
+          <button onClick={() => navigate(`/school/${schoolId || '1'}`, { state: { schoolName: schoolName || 'Trường Tiểu Học Lê Quý Đôn' } })} className="hover:underline font-bold">Chi tiết trường</button>
+          <span className="mx-2 text-slate-300">›</span>
+          <button onClick={() => navigate(`/student-book/${bookId || '74724411HS2530'}`, { state: { schoolName: schoolName || 'Trường Tiểu Học Lê Quý Đôn' } })} className="hover:underline font-bold">Chi tiết sổ {bookId || '74724411HS2530'}</button>
+          <span className="mx-2 text-slate-300">›</span>
+          <span className="text-slate-900 font-bold">Chi tiết học sinh</span>
+        </div>
 
-      <div className="flex flex-col md:flex-row gap-6 mb-6">
-        {/* Left Column: Header + Thông tin cá nhân */}
-        <div className="w-full md:w-1/2 space-y-6">
-          {/* Combined Header + Thông tin cá nhân */}
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-blue-600 h-full relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl -mr-32 -mt-32"></div>
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-indigo-50/50 rounded-full blur-2xl -ml-20 -mb-20"></div>
-            <div className="relative z-10">
-              <h1 className="text-2xl font-bold text-slate-800 mb-2">{student.name}</h1>
-              <p className="text-sm text-slate-500 font-medium mb-6">Mã sổ: {student.maSoSo} | Mã SĐB: {student.maSo}</p>
-              
-              <div className="border-t border-slate-300 my-4"></div>
-
-              <h3 className="text-sm font-bold text-slate-700 uppercase mb-4 flex items-center gap-2"><User size={16} className="text-blue-600"/> Thông tin cá nhân</h3>
-              <div className="space-y-2 text-xs">
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Họ tên:</span> <span className="text-slate-700">{student.personal.hoTen}</span></p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Giới tính:</span> <span className="text-slate-700">{student.personal.gioiTinh}</span></p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Ngày sinh:</span> <span className="text-slate-700">{student.personal.ngaySinh}</span></p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Nơi sinh:</span> <span className="text-slate-700">{student.personal.noiSinh}</span></p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Dân tộc:</span> <span className="text-slate-700">{student.personal.danToc}</span></p>
+        {/* Compact Header */}
+        <div className="bg-white rounded-2xl shadow-sm border border-blue-600 overflow-hidden mb-6">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-6 relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+            <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+              <div className="w-24 h-24 rounded-full border-4 border-white/30 bg-white/20 flex items-center justify-center overflow-hidden shadow-xl backdrop-blur-sm">
+                <User size={48} className="text-white/90" />
+              </div>
+              <div className="text-center md:text-left">
+                <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{student.name}</h1>
+                <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-2">
+                  <span className="px-3 py-1 bg-white/20 rounded-full text-white text-xs font-bold backdrop-blur-md border border-white/10">
+                    Mã SĐB: {student.maSo}
+                  </span>
+                  <span className="px-3 py-1 bg-white/20 rounded-full text-white text-xs font-bold backdrop-blur-md border border-white/10">
+                    Mã sổ: {student.maSoSo}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Information Cards */}
-        <div className="w-full md:w-1/2 space-y-6">
-          {/* Combined Thông tin gia đình & Thông tin cư trú & Chính sách */}
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-blue-600 h-full space-y-8">
-            <div>
-              <h3 className="text-sm font-bold text-slate-700 uppercase mb-4 flex items-center gap-2"><User size={16} className="text-blue-600"/> Thông tin gia đình</h3>
-              <div className="space-y-2 text-xs">
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Họ tên cha:</span> <span className="text-slate-700">{student.family.cha}</span></p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Nghề nghiệp cha:</span> <span className="text-slate-500">{student.family.ngheNghiepCha}</span></p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Họ tên mẹ:</span> <span className="text-slate-700">{student.family.me}</span></p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Nghề nghiệp mẹ:</span> <span className="text-slate-500">{student.family.ngheNghiepMe}</span></p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {/* Thông tin cá nhân */}
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-200 transition-all">
+            <h3 className="text-sm font-bold text-slate-700 uppercase mb-4 flex items-center gap-2">
+              <User size={16} className="text-blue-600"/> Thông tin cá nhân
+            </h3>
+            <div className="space-y-3 text-xs">
+              <div className="flex justify-between border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Họ tên</span>
+                <span className="text-slate-900 font-bold">{student.personal.hoTen}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Giới tính</span>
+                <span className="text-slate-700 font-medium">{student.personal.gioiTinh}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Ngày sinh</span>
+                <span className="text-slate-700 font-medium">{student.personal.ngaySinh}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Nơi sinh</span>
+                <span className="text-slate-700 font-medium">{student.personal.noiSinh}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Dân tộc</span>
+                <span className="text-slate-700 font-medium">{student.personal.danToc}</span>
               </div>
             </div>
+          </div>
 
-            <div>
-              <h3 className="text-sm font-bold text-slate-700 uppercase mb-4 flex items-center gap-2"><MapPin size={16} className="text-blue-600"/> Thông tin cư trú & Chính sách</h3>
-              <div className="space-y-2 text-xs">
-                <p className="flex justify-between items-start gap-4">
-                  <span className="font-bold text-slate-400 shrink-0">Chỗ ở hiện tại:</span>
-                  <span className="text-slate-700 text-right leading-relaxed">{student.residence.choO}</span>
-                </p>
-                <p className="flex justify-between"><span className="font-bold text-slate-400">Chính sách:</span> <span className="text-slate-700">{student.residence.chinhSach}</span></p>
+          {/* Thông tin gia đình */}
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-200 transition-all">
+            <h3 className="text-sm font-bold text-slate-700 uppercase mb-4 flex items-center gap-2">
+              <User size={16} className="text-blue-600"/> Thông tin gia đình
+            </h3>
+            <div className="space-y-3 text-xs">
+              <div className="flex justify-between border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Họ tên cha</span>
+                <span className="text-slate-900 font-bold">{student.family.cha}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Nghề nghiệp cha</span>
+                <span className="text-slate-700 font-medium">{student.family.ngheNghiepCha}</span>
+              </div>
+              <div className="flex justify-between border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Họ tên mẹ</span>
+                <span className="text-slate-900 font-bold">{student.family.me}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Nghề nghiệp mẹ</span>
+                <span className="text-slate-700 font-medium">{student.family.ngheNghiepMe}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Thông tin cư trú & Chính sách */}
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-200 transition-all md:col-span-2">
+            <h3 className="text-sm font-bold text-slate-700 uppercase mb-4 flex items-center gap-2">
+              <MapPin size={16} className="text-blue-600"/> Thông tin cư trú & Chính sách
+            </h3>
+            <div className="space-y-3 text-xs">
+              <div className="flex flex-col md:flex-row md:justify-between gap-2 border-b border-slate-50 pb-2">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Chỗ ở hiện tại</span>
+                <span className="text-slate-700 font-medium md:text-right max-w-2xl leading-relaxed">{student.residence.choO}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-bold text-slate-400 uppercase tracking-wider">Chính sách ưu tiên</span>
+                <span className="text-slate-700 font-medium">{student.residence.chinhSach}</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Section: QUÁ TRÌNH HỌC TẬP & KHEN THƯỞNG - Modern Table Diagram */}
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-600">
+        {/* Bottom Section: QUÁ TRÌNH HỌC TẬP & KHEN THƯỞNG */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-600">
         <h3 className="text-sm font-bold text-slate-700 uppercase mb-6 flex items-center gap-2">
           <BookOpen size={18} className="text-blue-600"/> QUÁ TRÌNH HỌC TẬP & KHEN THƯỞNG
         </h3>
@@ -297,7 +341,8 @@ const StudentDetail = () => {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default StudentDetail;

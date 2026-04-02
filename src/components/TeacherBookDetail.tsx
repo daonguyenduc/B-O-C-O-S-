@@ -3,14 +3,12 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Download, FileText, Clock, Search, FileDown, ArrowLeft } from 'lucide-react';
 
 import ProcessTimeline from './ProcessTimeline';
-import TeacherProfile from './TeacherProfile';
 
 const TeacherBookDetail = () => {
   const { bookId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedYear, setSelectedYear] = useState('Năm học 2025 - 2026');
-  const [selectedTeacher, setSelectedTeacher] = useState<any>(null);
 
   const rawId = bookId || "GV-ND-2025 (2025-2026)";
   const match = rawId.match(/(.*?)\s*\((.*?)\)/);
@@ -37,14 +35,14 @@ const TeacherBookDetail = () => {
     },
     dataByYear: {
       'Năm học 2025 - 2026': [
-        { stt: 1, maVc: 'VC001', name: 'Nguyễn Thị An', chuyenMon: 'Toán', to: 'Tổ Toán - Tin', status: 'Đang công tác' },
-        { stt: 2, maVc: 'VC002', name: 'Trần Văn Bình', chuyenMon: 'Ngữ Văn', to: 'Tổ Xã hội', status: 'Đang công tác' },
-        { stt: 3, maVc: 'VC003', name: 'Lê Thị Cẩm', chuyenMon: 'Tiếng Anh', to: 'Tổ Ngoại ngữ', status: 'Đang công tác' },
-        { stt: 4, maVc: 'VC004', name: 'Phạm Hoàng Duy', chuyenMon: 'Vật Lý', to: 'Tổ Tự nhiên', status: 'Đang công tác' },
-        { stt: 5, maVc: 'VC005', name: 'Vũ Ngọc Em', chuyenMon: 'Hóa Học', to: 'Tổ Tự nhiên', status: 'Đang công tác' },
-        { stt: 6, maVc: 'VC006', name: 'Đặng Đình Phong', chuyenMon: 'Lịch Sử', to: 'Tổ Xã hội', status: 'Đang công tác' },
-        { stt: 7, maVc: 'VC007', name: 'Bùi Mai Giang', chuyenMon: 'Địa Lý', to: 'Tổ Xã hội', status: 'Đang công tác' },
-        { stt: 8, maVc: 'VC008', name: 'Ngô Xuân Hùng', chuyenMon: 'Tin Học', to: 'Tổ Toán - Tin', status: 'Đang công tác' },
+        { stt: 1, maGv: '7903663195', name: 'Nguyễn Thị An', chuyenMon: 'Toán', to: 'Tổ Toán - Tin', status: 'Đang công tác' },
+        { stt: 2, maGv: '7903663196', name: 'Trần Văn Bình', chuyenMon: 'Ngữ Văn', to: 'Tổ Xã hội', status: 'Đang công tác' },
+        { stt: 3, maGv: '7903663197', name: 'Lê Thị Cẩm', chuyenMon: 'Tiếng Anh', to: 'Tổ Ngoại ngữ', status: 'Đang công tác' },
+        { stt: 4, maGv: '7903663198', name: 'Phạm Hoàng Duy', chuyenMon: 'Vật Lý', to: 'Tổ Tự nhiên', status: 'Đang công tác' },
+        { stt: 5, maGv: '7903663199', name: 'Vũ Ngọc Em', chuyenMon: 'Hóa Học', to: 'Tổ Tự nhiên', status: 'Đang công tác' },
+        { stt: 6, maGv: '7903663200', name: 'Đặng Đình Phong', chuyenMon: 'Lịch Sử', to: 'Tổ Xã hội', status: 'Đang công tác' },
+        { stt: 7, maGv: '7903663201', name: 'Bùi Mai Giang', chuyenMon: 'Địa Lý', to: 'Tổ Xã hội', status: 'Đang công tác' },
+        { stt: 8, maGv: '7903663202', name: 'Ngô Xuân Hùng', chuyenMon: 'Tin Học', to: 'Tổ Toán - Tin', status: 'Đang công tác' },
       ],
       'Năm học 2026 - 2027': [],
       'Năm học 2027 - 2028': [],
@@ -53,20 +51,6 @@ const TeacherBookDetail = () => {
   };
 
   const teachers = book.dataByYear[selectedYear as keyof typeof book.dataByYear] || [];
-
-  if (selectedTeacher) {
-    return (
-      <div className="min-h-screen p-4 md:p-8 bg-slate-50/30">
-        <div className="max-w-7xl mx-auto">
-          <TeacherProfile 
-            teacher={selectedTeacher} 
-            bookCode={book.code} 
-            onBack={() => setSelectedTeacher(null)} 
-          />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen">
@@ -132,25 +116,25 @@ const TeacherBookDetail = () => {
           </div>
 
           <div className="p-6 overflow-x-auto">
-            <table className="w-full text-xs text-left table-fixed">
-              <thead className="text-[10px] text-slate-400 uppercase tracking-widest border-b border-slate-50">
-                <tr>
-                  <th className="px-2 py-3 font-bold w-12 text-center">STT</th>
-                  <th className="px-2 py-3 font-bold w-24">MÃ VC/CC</th>
-                  <th className="px-4 py-3 font-bold w-1/4">HỌ VÀ TÊN</th>
-                  <th className="px-4 py-3 font-bold">CHUYÊN MÔN</th>
-                  <th className="px-4 py-3 font-bold">TỔ</th>
-                  <th className="px-4 py-3 font-bold w-1/6">TRẠNG THÁI</th>
+            <table className="w-full text-xs text-left border border-slate-200">
+              <thead className="text-[11px] text-slate-700 uppercase tracking-wider bg-slate-100 border-b border-slate-200">
+                <tr className="divide-x divide-slate-200">
+                  <th className="px-4 py-3 font-extrabold w-12 text-center">STT</th>
+                  <th className="px-4 py-3 font-extrabold w-24">MÃ GIÁO VIÊN</th>
+                  <th className="px-4 py-3 font-extrabold w-1/4">HỌ VÀ TÊN</th>
+                  <th className="px-4 py-3 font-extrabold">CHUYÊN MÔN</th>
+                  <th className="px-4 py-3 font-extrabold">TỔ</th>
+                  <th className="px-4 py-3 font-extrabold w-1/6">TRẠNG THÁI</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50">
+              <tbody className="divide-y divide-slate-200">
                 {teachers.length > 0 ? teachers.map(teacher => (
-                  <tr key={teacher.maVc} className="hover:bg-slate-50/30 transition-colors">
-                    <td className="px-2 py-4 text-slate-500 font-medium truncate text-center">{teacher.stt}</td>
-                    <td className="px-2 py-4 font-bold text-slate-700 truncate">{teacher.maVc}</td>
+                  <tr key={teacher.maGv} className="hover:bg-slate-50/80 transition-colors divide-x divide-slate-200">
+                    <td className="px-4 py-4 text-slate-500 font-medium text-center">{teacher.stt}</td>
+                    <td className="px-4 py-4 font-bold text-slate-700">{teacher.maGv}</td>
                     <td 
                       className="px-4 py-4 font-bold text-blue-600 cursor-pointer hover:underline break-words"
-                      onClick={() => setSelectedTeacher(teacher)}
+                      onClick={() => navigate(`/teacher/${teacher.maGv}`, { state: { teacher, bookCode: book.code, schoolName: book.school, schoolId: schoolId } })}
                     >
                       {teacher.name}
                     </td>

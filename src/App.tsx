@@ -12,6 +12,7 @@ import SchoolDetail from './components/SchoolDetail';
 import StudentBookDetail from './components/StudentBookDetail';
 import StudentDetail from './components/StudentDetail';
 import TeacherBookDetail from './components/TeacherBookDetail';
+import TeacherDetail from './components/TeacherDetail';
 import { School, UserX, FilePlus, FileCheck, ShieldAlert, Trophy, Users, Menu, X, BookOpen, BarChart2 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
@@ -247,6 +248,7 @@ export default function App() {
               <Route path="/student-book/:bookId" element={<StudentBookDetail />} />
               <Route path="/student/:studentId" element={<StudentDetail />} />
               <Route path="/teacher-book/:bookId" element={<TeacherBookDetail />} />
+              <Route path="/teacher/:teacherId" element={<TeacherDetail />} />
             </Routes>
           </main>
         </div>
